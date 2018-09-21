@@ -1,0 +1,53 @@
+<!doctype html>
+<head>
+<title>Hello from Flask</title>
+<script src="{{url_for('static',filename='Datetime-Picker-jQuery-Moment/js/jquery-1.12.4.min.js')}}"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment-with-locales.min.js"></script>
+
+
+
+<link rel="stylesheet" href="{{url_for('static',filename='Datetime-Picker-jQuery-Moment/css/datetimepicker.css')}}">
+<script src="{{url_for('static',filename='Datetime-Picker-jQuery-Moment/js/datetimepicker.js')}}"></script>
+
+
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#start-picker').dateTimePicker();
+		$('#end-picker').dateTimePicker();
+    })
+    </script>
+</head>
+
+
+<body>
+<form method="post">
+	<p>Logitude: <input type=text name=longitude></p>
+	<p>Latitude: <input type=text name=latitude></p>
+	<h3>UTC Start Date and Time</h3>
+	<p>Please convert your local time to UTC time. <br>
+	<a href="https://time.is/UTC" target="_blank">Get the current UTC time</a><br>
+	<div id="date-time-picker"></div>
+	<h3>Start time (UTC time)</h3>
+	<div id="end-time-picker"></div>
+	
+	<div style="width: 250px; margin: 50px auto;">
+    <div id="start-picker"> </div>
+    <input type="hidden" id="result-start-time" name="result-start-time" value="" />
+	</div>
+	
+	<h3>End time (UTC time)</h3>
+	<div style="width: 250px; margin: 50px auto;">
+    <div id="end-picker"> </div>
+    <input type="hidden" id="result-end-time" name="result-end-time" value="" />
+	</div>
+	
+	<h3>Update Interval (in Minutes)</h3>
+	<p>Interval: <input type=text name=interval></p>
+
+
+	<p><input type=submit value=Submit>
+</form>
+</body>

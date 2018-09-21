@@ -1,0 +1,21 @@
+Turntable Commands
+
+Commands are ALL UPPERCASE.
+
+Bn            move By n degrees from current position
+Cn            move Continuously at n degrees/second
+E             Emergency stop, idles stepper
+H             move Home by shortest path
+Pa,b,c,d,e    move Periodically,
+              a = period in seconds
+              b = start position in degrees
+              c = stop position in degrees
+              d = movement in degrees
+              e = repeat count, 0 = indefinitely
+S             Stop
+Tn            move To position n degrees from zero
+Z             Zero position, sets home
+
+If accepted, acknowledged with same command character.
+If rejected, acknowledged with X.
+When completed, acknowledged with -.

@@ -1,0 +1,21 @@
+#######################################
+# Syntax Coloring Map For PeriodicTimer
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+PeriodicTimer	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+update	KEYWORD2
+start	KEYWORD2
+stop KEYWORD2
+getTime KEYWORD2
+isAlarm KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
