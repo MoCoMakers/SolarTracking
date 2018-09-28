@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include "Integrator.h"
-#include "TimeBase.h"
 
 Integrator::Integrator(const TimeStep& dt, double yInitial) : 
   m_dt(dt), m_yValue(yInitial), m_cache(Cache(3))

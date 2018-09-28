@@ -25,7 +25,9 @@ def hello(name= None):
 		current_height=0
 		longitude=float(longitude)
 		latitude=float(latitude)
+		print "start_time: "+str(start_time)
 		result = suntr.get_azimuth(start_time, latitude, longitude, current_height)
+		
 		return "Result: "+str(result)
 
 	else:
