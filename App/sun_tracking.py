@@ -19,4 +19,4 @@ def get_azimuth(obstime, latitude, longitude, current_height):
 
 	frame_altaz = AltAz(obstime=Time(obstime), location=current_location)
 	sun_altaz = c.transform_to(frame_altaz)
-	return 'Altitude is {0} and Azimuth is {1}'.format(sun_altaz.T.alt, sun_altaz.T.az)
+	return '{0}'.format(sun_altaz.T.alt),'{0}'.format(sun_altaz.T.az)

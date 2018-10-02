@@ -6,6 +6,8 @@ cgitb.enable()
 
 import sun_tracking as suntr
 
+from datetime import datetime, timedelta
+
 app = Flask(__name__, static_url_path='/static')
 
 @app.route("/", methods=['GET', 'POST'])
@@ -25,10 +27,30 @@ def hello(name= None):
 		current_height=0
 		longitude=float(longitude)
 		latitude=float(latitude)
+		
+		delta=0
+		start_datetime=datetime.strptime(start_time,"%Y-%m-%d %H:%M")
+		end_datetime=datetime.strptime(end_time,"%Y-%m-%d %H:%M")
+		new_datetime = start_datetime +timedelta(0,int(interval)) # days, seconds, then other fields.
+		all_values=""
+		list_of_dates=[]
+		while(new_datetime<end_datetime):
+			delta=delta+int(interval)
+			new_date=datetime.strftime(new_datetime, "%Y-%m-%d %H:%M:%S")
+			list_of_dates.append(new_date)
+			new_datetime=start_datetime+timedelta(0,delta) #increment the time by seconds
+		
+		total=len(list_of_dates)-1
+		for index in range(0,len(list_of_dates)):
+			print "At "+str(((index*1.0)/total)*100)+"%"
+			current_date=list_of_dates[index]
+			result_alt, result_azi = suntr.get_azimuth(current_date, latitude, longitude, current_height)
+			current_value= new_date+","+str(result_alt)+","+str(result_azi)
+			all_values=all_values+current_value+"<br>"
 		print "start_time: "+str(start_time)
 		result = suntr.get_azimuth(start_time, latitude, longitude, current_height)
 		
-		return "Result: "+str(result)
+		return str(all_values)
 
 	else:
 		return render_template('grab_data.html', name=name)
