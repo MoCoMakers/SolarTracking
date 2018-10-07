@@ -7,6 +7,9 @@ cgitb.enable()
 import sun_tracking as suntr
 
 from datetime import datetime, timedelta
+from geomag import geomag
+import inspect
+import os
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -40,13 +43,28 @@ def hello(name= None):
 			list_of_dates.append(new_date)
 			new_datetime=start_datetime+timedelta(0,delta) #increment the time by seconds
 		
+		path = os.path.dirname(inspect.getfile(geomag))
+		COF_File= os.path.join(path,"WMM.COF")
+		
+		gm = geomag.GeoMag(COF_File)
+		
+		
 		total=len(list_of_dates)-1
 		for index in range(0,len(list_of_dates)):
 			print "At "+str(((index*1.0)/total)*100)+"%"
 			current_date=list_of_dates[index]
 			result_alt, result_azi = suntr.get_azimuth(current_date, latitude, longitude, current_height)
-			current_value= new_date+","+str(result_alt)+","+str(result_azi)
+			
+			#Get magnetic delictionation
+			mag = gm.GeoMag(latitude,longitude)
+			declination = mag.dec # -6.1335150785195536
+			
+			current_value= current_date+","+str(result_alt)+","+str(result_azi)+","+str(declination)
 			all_values=all_values+current_value+"<br>"
+			
+			
+
+		
 		print "start_time: "+str(start_time)
 		result = suntr.get_azimuth(start_time, latitude, longitude, current_height)
 		
@@ -63,6 +81,19 @@ def run_command(command=None):
 		longitude = -104.221800
 		current_height= 40
 		current_azimuth = suntr.get_azimuth(obstime, latitude, longitude, current_height)
-		return "Command was "+command+"\nResult was: "+str(current_azimuth)
+		
+		#Get Magnetic Declination (angle devation from True )
+		
+		path = os.path.dirname(inspect.getfile(geomag))
+		COF_File= os.path.join(path,"WMM.COF")
+		
+		gm = geomag.GeoMag(COF_File)
+		
+		mag = gm.GeoMag(latitude,longitude)
+		
+		declination = mag.dec # -6.1335150785195536
+
+
+		return "Command was "+command+"\nResult was: "+str(current_azimuth)+" declicnation:"+str(declination)
 	else:
 		return "Command not found"
