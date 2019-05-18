@@ -107,7 +107,9 @@
                                 var day = parseInt(m.format('D'));
                                 $b.text(day);
                                 if (flagStart && day < dayNow) {
-                                    $b.addClass('dtp_modal-grey');
+                                    //$b.addClass('dtp_modal-grey');
+									$b.addClass('cursorily');  // MODIFIED TO ADD
+									$b.bind('click', changeDate); // MODIFIED TO ADD
                                 }
                                 else if (flagSelect && day == cerDay) {
                                     $b.addClass('dtp_modal-cell-selected');
@@ -177,10 +179,15 @@
                 }
 
                 function prevMonth() {
+					/*
                     if (totalMonths(selectDate) > totalMonths(startDate)) {
                         selectDate.add(-1, 'month');
                         feelDates(selectDate);
                     }
+					
+					*/
+					selectDate.add(-1, 'month');
+                    feelDates(selectDate);
                 }
 
                 function attachChangeTime() {

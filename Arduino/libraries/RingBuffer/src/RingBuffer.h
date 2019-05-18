@@ -55,7 +55,7 @@ class RingBuffer
          * This method resets the head and tail pointers, and marks the buffer
          * as empty and not-full.
          */
-        virtual void clear();
+        void clear();
         
         /**
          * Push a byte into the back of the buffer
@@ -68,7 +68,7 @@ class RingBuffer
          *
          * @param b byte to be pushed into the buffer
          */
-        virtual void push(byte b);
+        void push(byte b);
         
         /**
          * Pop a byte from the front of the buffer
@@ -80,21 +80,21 @@ class RingBuffer
          *
          * @return byte popped from the buffer
          */
-        virtual byte pop();
+        byte pop();
         
         /**
          * Check if the buffer is empty
          *
          * @return true if empty, false otherwise
          */
-        virtual bool isEmpty() const;
+        bool isEmpty() const;
         
         /**
          * Check if the buffer is full
          *
          * @return true if full, false otherwise
          */
-        virtual bool isFull() const;
+        bool isFull() const;
 };
 
 #endif
